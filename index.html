@@ -7,6 +7,7 @@
 </head>
 <body>
     <script>
+
         class Perso {
             constructor(name, thaco, pv, ca) {
                 this.name = name;
@@ -39,17 +40,72 @@
             }
         }
 
+        class Round {
+            constructor(character1, character2) {
+                this.character1 = character1;
+                this.character2 = character2;
+                this.dice = dice;
+            }
+
+            rollInit() {
+                return this.dice.throwDice(10);
+            }
+
+            rollThaco() {
+                return this.dice.throwDice(20);
+            }
+
+            rollDamage() {
+                return this.dice.throwDice(8);
+            }
+
+            rollRound() {
+                const initiativeCh1 = this.rollInit();
+                const initiativeCh2 = this.rollInit();
+                const thacoRollCh1 = this.rollThaco();
+                const thacoRollCh2 = this.rollThaco();
+                const rollDamageCh1 = this.rollThaco();
+                const rollDamageCh2 = this.rollThaco();
+
+                const arrayCh1 = [
+                    this.character1,
+                    initiativeCh1,
+                    thacoRollCh1,
+                    rollDamageCh1,
+                ]
+
+                const arrayCh2 = [
+                    this.character1,
+                    initiativeCh1,
+                    thacoRollCh1,
+                    rollDamageCh1,
+                ]
+                
+                return {
+                    arrayCh1,
+                    arrayCh2
+                };
+            }
+        }
+
+        // 1. define the dice since the other classes use this big time
         let dice = new Dice();
 
+        // 2. define the characters - 1. name 2. thaco 3. HP 4. AC
         let bordur = new Perso("Bordur", 20, dice.throwDice(10), 10);
         let orc = new Perso("orc", 20, dice.throwDice(8), 10);
 
+        // 3. define a round
+        let round = new Round(bordur, orc);
 
-        console.log(dice.throwDice(10));
+
 
         console.log(bordur.getInfos());
 
         console.log(orc.getInfos());
+
+        console.log(round.rollInit());
+        console.log(round.rollRound());
 
     </script>
 </body>

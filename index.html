@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Perso {
+            constructor(name, thaco, pv, ca) {
+                this.name = name;
+                this.thaco = thaco;
+                this.pv = pv;
+                this.ca = ca;
+            }
+
+            getInfos() {
+                return `===${this.name}===
+                        \n${this.thaco} de thaco
+                        \n${this.pv} PV
+                        \n${this.ca} de CA
+                        .`;
+            }
+
+            lowerPV() {
+                this.pv = this.pv - throwDice(dice);
+                return this.pv;
+            }
+        }
+
+        class Dice {
+            constructor(dice) {
+                this.dice = dice;
+            }
+
+            throwDice(dice) {
+                return Math.floor(Math.random() * dice) + 1;
+            }
+        }
+
+        let dice = new Dice();
+
+        let bordur = new Perso("Bordur", 20, dice.throwDice(10), 10);
+        let orc = new Perso("orc", 20, dice.throwDice(8), 10);
+
+
+        console.log(dice.throwDice(10));
+
+        console.log(bordur.getInfos());
+
+        console.log(orc.getInfos());
+
+    </script>
+</body>
+</html>

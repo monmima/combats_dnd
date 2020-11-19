@@ -64,26 +64,34 @@
                 const initiativeCh2 = this.rollInit();
                 const thacoRollCh1 = this.rollThaco();
                 const thacoRollCh2 = this.rollThaco();
-                const rollDamageCh1 = this.rollThaco();
-                const rollDamageCh2 = this.rollThaco();
+                const rollDamageCh1 = this.rollDamage();
+                const rollDamageCh2 = this.rollDamage();
+                const hitsOpponentCh1 = thacoRollCh1 >= this.character1.thaco - this.character2.ca ? true : false;
+                const hitsOpponentCh2 = thacoRollCh2 >= this.character2.thaco - this.character1.ca ? true : false;
 
-                const arrayCh1 = [
-                    this.character1,
-                    initiativeCh1,
-                    thacoRollCh1,
-                    rollDamageCh1,
-                ]
+                const objectCh1 = {
+                    basicData: this.character1,
+                    roundData: {
+                        initiative: initiativeCh1,
+                        thacoRoll: thacoRollCh1,
+                        damageRoll: rollDamageCh1,
+                        hitsOpponent: hitsOpponentCh1
+                    }
+                }
 
-                const arrayCh2 = [
-                    this.character1,
-                    initiativeCh1,
-                    thacoRollCh1,
-                    rollDamageCh1,
-                ]
+                const objectCh2 = {
+                    basicData: this.character2,
+                    roundData: {
+                        initiative: initiativeCh2,
+                        thacoRoll: thacoRollCh2,
+                        damageRoll: rollDamageCh2,
+                        hitsOpponent: hitsOpponentCh2
+                    }
+                }
                 
                 return {
-                    arrayCh1,
-                    arrayCh2
+                    objectCh1,
+                    objectCh2
                 };
             }
         }
@@ -100,11 +108,6 @@
 
 
 
-        console.log(bordur.getInfos());
-
-        console.log(orc.getInfos());
-
-        console.log(round.rollInit());
         console.log(round.rollRound());
 
     </script>

@@ -94,7 +94,34 @@
                     objectCh2
                 };
             }
+
+            getInitiativeOutcome() {
+                const roundInfo = this.rollRound();
+
+                const ch1 = roundInfo.objectCh1;
+                const ch2 = roundInfo.objectCh2;
+
+                if (ch1.roundData.initiative < ch2.roundData.initiative) {
+                    return ch1.basicData.name;
+                } else if (ch1.roundData.initiative > ch2.roundData.initiative) {
+                    return ch2.basicData.name;
+                } else {
+                    return "En même temps!";
+                }
+
+            }
+
+            playRound() {
+                const roundInfo = this.rollRound();
+
+                const ch1 = roundInfo.objectCh1;
+                const ch2 = roundInfo.objectCh2;
+
+
+            }
         }
+
+
 
         // 1. define the dice since the other classes use this big time
         let dice = new Dice();
@@ -109,6 +136,7 @@
 
 
         console.log(round.rollRound());
+        console.log(round.getInitiativeOutcome());
 
     </script>
 </body>

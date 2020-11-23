@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+    test
+
     <script>
 
         class Perso {
@@ -102,9 +104,14 @@
                 message = `${attackingCh.basicData.name} hits!`;
                 console.log(message);
 
-                console.log(woundedCh.basicData.pv);
                 woundedCh.basicData.lowerPV();
                 console.log(woundedCh.basicData.pv);
+
+                // impression à l'écran
+                document.querySelector("body").innerHTML +=
+                    `<br>
+                    ${message}<br>
+                    ${woundedCh.basicData.pv}<br>`;
             }
 
             playRound() {
@@ -115,15 +122,14 @@
 
                 // ch1 strikes first
                 if (ch1.roundData.initiative < ch2.roundData.initiative) {
-
+                    let result;
                     
                     if (ch1.roundData.hitsOpponent) {
-                        this.handleDamage(ch1, ch2);
+                        result = this.handleDamage(ch1, ch2);
                     }
 
-                    // ch2 strikes back
                     if (ch2.roundData.hitsOpponent && (ch2.basicData.pv > 0)) {
-                        this.handleDamage(ch2, ch1);
+                        result = this.handleDamage(ch1, ch2);
                     }
 
                     return `${ch1.basicData.getInfos()}\n${ch2.basicData.getInfos()}`
@@ -137,7 +143,7 @@
                     }
 
                     // ch1 strikes back
-                    if (ch1.roundData.hitsOpponent && (ch2.basicData.pv > 0)) {
+                    if (ch1.roundData.hitsOpponent && (ch1.basicData.pv > 0)) {
                         this.handleDamage(ch1, ch2);
                     }
 
@@ -178,6 +184,7 @@
 
         round.rollRound();
         round.playRound();
+
 
     </script>
 </body>
